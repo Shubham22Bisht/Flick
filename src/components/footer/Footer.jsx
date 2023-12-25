@@ -7,7 +7,6 @@ import {
 } from "react-icons/fa";
 
 import {ContentWrapper} from "../contentWrapper/ContentWrapper";
-import  Mountain from "../../assets/Mountain.jpg";
 import "./style.scss";
 export const Footer = () => {
     return (
