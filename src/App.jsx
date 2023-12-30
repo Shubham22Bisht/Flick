@@ -10,6 +10,7 @@ import { Details } from "./pages/details/Details";
 import { SearchResult } from "./pages/searchResult/SearchResult";
 import  PageNotFound  from "./pages/404/PageNotFound";
 import  Explore  from "./pages/explore/Explore";
+import PersonCard from "./components/personCard/PersonCard.jsx";
 
 function App() {
   const dispatch = useDispatch();
@@ -47,13 +48,13 @@ function App() {
     });
     dispatch(getGenres(allGenres));
   };
-
   return (
     <Router>
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/:mediaType/:id" element={<Details />} />
+        <Route path="/person/:id" element={<PersonCard/>}/>
         <Route path="/search/:query" element={<SearchResult />} />
         <Route path="/explore/:mediaType" element={<Explore />} />
         <Route path="*" element={<PageNotFound />} />

@@ -29,8 +29,17 @@
     }
     .logo {
         cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
         img {
             height: 50px;
+        }
+        .logoText{
+            font-family: 'Montserrat', sans-serif;
+            font-size: 50px;
+            color:rgb(240, 135, 31);
+            font-weight: 1000;
         }
     }
     .menuItems {

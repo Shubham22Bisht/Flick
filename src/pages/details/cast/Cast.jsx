@@ -6,10 +6,11 @@ import "./style.scss";
 import {ContentWrapper} from "../../../components/contentWrapper/ContentWrapper";
 import {Img} from "../../../components/lazyLoadImage/Img";
 import avatar from "../../../assets/avatar.png";
+import { useNavigate } from "react-router-dom";
 
 const Cast = ({ data, loading }) => {
     const { url } = useSelector((state) => state.home);
-
+    const navigate=useNavigate();
     const skeleton = () => {
         return (
             <div className="skItem">
@@ -29,7 +30,7 @@ const Cast = ({ data, loading }) => {
                             let imgUrl=item?.profile_path ? url?.profile + item.profile_path:avatar;
                             return (
                                 <div key={item.id}
-                                className="listItem">
+                                className="listItem" onClick={()=>navigate(`/person/${item.id}`)}>
                                     <div className="profileImg">
                                         <Img src={imgUrl} />
                                     </div>

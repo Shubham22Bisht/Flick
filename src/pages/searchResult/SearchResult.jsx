@@ -1,14 +1,12 @@
 import React ,{useState,useEffect} from 'react';
 import { useParams } from 'react-router-dom';
 import InfiniteScroll from "react-infinite-scroll-component";
-
 import "./style.scss";
 
 import { fetchDataFromApi } from '../../utils/api';
 import { ContentWrapper } from '../../components/contentWrapper/ContentWrapper';
 import MovieCard from "../../components/movieCard/MovieCard.jsx";
 import Spinner from "../../components/spinner/Spinner.jsx";
-import noResults from "../../assets/no-results.png";
 
 export const SearchResult = () => {
   
@@ -62,7 +60,6 @@ export const SearchResult = () => {
                loader={<Spinner/>}>
                 {
                   data?.results?.map((item,index)=>{
-                   if(item.name==="person")return ;
                    return (
                      <MovieCard key={index} data={item} />
                    )
@@ -71,9 +68,12 @@ export const SearchResult = () => {
               </InfiniteScroll>
               </>
             ):(
-              <span className="resultNotFound">
+              <div>
+                <span className="resultNotFound">
                 Sorry , Results not Available
-              </span>
+                </span>
+              </div>
+              
             )}
           </ContentWrapper>
 
