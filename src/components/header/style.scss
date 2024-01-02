@@ -1,160 +1,250 @@
 @import "../../mixins.scss";
 
 .header {
-    position: fixed;
-    transform: translateY(0);
-    width: 100%;
-    height: 60px;
-    z-index: 1;
+  position: fixed;
+  transform: translateY(0);
+  width: 100%;
+  height: 60px;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  transition: all ease 0.5s;
+  z-index: 2;
+  &.top {
+    background: rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(3.5px);
+    -webkit-backdrop-filter: blur(3.5px);
+  }
+  &.show {
+    background-color: var(--black3);
+  }
+  &.hide {
+    transform: translateY(-60px);
+  }
+
+  .contentWrapper {
     display: flex;
     align-items: center;
-    transition: all ease 0.5s;
-    z-index: 2;
-    &.top {
-        background: rgba(0, 0, 0, 0.25);
-        backdrop-filter: blur(3.5px);
-        -webkit-backdrop-filter: blur(3.5px);
+    justify-content: space-between;
+  }
+  .logo {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    img {
+      height: 50px;
     }
-    &.show {
-        background-color: var(--black3);
+    .logoText {
+      font-family: "Montserrat", sans-serif;
+      font-size: 50px;
+      color: rgb(240, 135, 31);
+      font-weight: 1000;
     }
-    &.hide {
-        transform: translateY(-60px);
+  }
+  .menuItems {
+    list-style-type: none;
+    display: none;
+    align-items: center;
+    @include md {
+      display: flex;
     }
+    .menuItem {
+      height: 60px;
+      display: flex;
+      align-items: center;
+      margin: 0 15px;
+      color: white;
+      font-weight: 500;
+      position: relative;
+      &.searchIcon {
+        margin-right: 0;
+      }
+      svg {
+        font-size: 18px;
+      }
+      cursor: pointer;
+      &:hover {
+        color: var(--pink);
+      }
+    }
+  }
 
-    .contentWrapper {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
+  .mobileMenuItems {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    @include md {
+      display: none;
     }
-    .logo {
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        img {
-            height: 50px;
-        }
-        .logoText{
-            font-family: 'Montserrat', sans-serif;
-            font-size: 50px;
-            color:rgb(240, 135, 31);
-            font-weight: 1000;
-        }
+    svg {
+      font-size: 18px;
+      color: white;
     }
+  }
+
+  &.mobileView {
+    background: var(--black3);
     .menuItems {
-        list-style-type: none;
-        display: none;
-        align-items: center;
-        @include md {
-            display: flex;
-        }
-        .menuItem {
-            height: 60px;
-            display: flex;
-            align-items: center;
-            margin: 0 15px;
-            color: white;
-            font-weight: 500;
-            position: relative;
-            &.searchIcon {
-                margin-right: 0;
-            }
-            svg {
-                font-size: 18px;
-            }
-            cursor: pointer;
-            &:hover {
-                color: var(--pink);
-            }
-        }
-    }
-
-    .mobileMenuItems {
-        display: flex;
-        align-items: center;
-        gap: 20px;
-        @include md {
-            display: none;
-        }
-        svg {
-            font-size: 18px;
-            color: white;
-        }
-    }
-
-    &.mobileView {
-        background: var(--black3);
-        .menuItems {
-            display: flex;
-            position: absolute;
-            top: 60px;
-            left: 0;
-            background: var(--black3);
-            flex-direction: column;
-            width: 100%;
-            padding: 20px 0;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            animation: mobileMenu 0.3s ease forwards;
-            .menuItem {
-                font-size: 20px;
-                width: 100%;
-                height: auto;
-                padding: 15px 20px;
-                margin: 0;
-                display: flex;
-                flex-direction: column;
-                align-items: flex-start;
-                &:last-child {
-                    display: none;
-                }
-            }
-        }
-    }
-
-    .searchBar {
+      display: flex;
+      position: absolute;
+      top: 60px;
+      left: 0;
+      background: var(--black3);
+      flex-direction: column;
+      width: 100%;
+      padding: 20px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      animation: mobileMenu 0.3s ease forwards;
+      .menuItem {
+        font-size: 20px;
         width: 100%;
-        height: 60px;
-        background-color: white;
-        position: absolute;
-        top: 60px;
-        animation: mobileMenu 0.3s ease forwards;
-        .searchInput {
-            display: flex;
-            align-items: center;
-            height: 40px;
-            margin-top: 10px;
-            width: 100%;
-            svg {
-                font-size: 20px;
-                flex-shrink: 0;
-                margin-left: 10px;
-                cursor: pointer;
-            }
-            input {
-                width: 100%;
-                height: 50px;
-                background-color: white;
-                outline: 0;
-                border: 0;
-                border-radius: 30px 0 0 30px;
-                padding: 0 15px;
-                font-size: 14px;
-                @include md {
-                    height: 60px;
-                    font-size: 20px;
-                    padding: 0 30px;
-                }
-            }
+        height: auto;
+        padding: 15px 20px;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        &:last-child {
+          display: none;
         }
+      }
     }
+  }
+
+  .searchBar {
+    width: 100%;
+    height: 60px;
+    background-color: white;
+    position: absolute;
+    top: 60px;
+    animation: mobileMenu 0.3s ease forwards;
+    .searchInput {
+      display: flex;
+      align-items: center;
+      height: 40px;
+      margin-top: 10px;
+      width: 100%;
+      svg {
+        font-size: 20px;
+        flex-shrink: 0;
+        margin-left: 10px;
+        cursor: pointer;
+      }
+      input {
+        width: 100%;
+        height: 50px;
+        background-color: white;
+        outline: 0;
+        border: 0;
+        border-radius: 30px 0 0 30px;
+        padding: 0 15px;
+        font-size: 14px;
+        @include md {
+          height: 60px;
+          font-size: 20px;
+          padding: 0 30px;
+        }
+      }
+    }
+  }
+  .login-with-google-btn {
+    transition: background-color 0.3s, box-shadow 0.3s;
+
+    padding-left: 20px;
+    margin-left: 10px;
+    margin-right: 20px;
+    height: 40px;
+    width: 100px;
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.04), 0 1px 1px rgba(0, 0, 0, 0.25);
+
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj48cGF0aCBkPSJNMTcuNiA5LjJsLS4xLTEuOEg5djMuNGg0LjhDMTMuNiAxMiAxMyAxMyAxMiAxMy42djIuMmgzYTguOCA4LjggMCAwIDAgMi42LTYuNnoiIGZpbGw9IiM0Mjg1RjQiIGZpbGwtcnVsZT0ibm9uemVybyIvPjxwYXRoIGQ9Ik05IDE4YzIuNCAwIDQuNS0uOCA2LTIuMmwtMy0yLjJhNS40IDUuNCAwIDAgMS04LTIuOUgxVjEzYTkgOSAwIDAgMCA4IDV6IiBmaWxsPSIjMzRBODUzIiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48cGF0aCBkPSJNNCAxMC43YTUuNCA1LjQgMCAwIDEgMC0zLjRWNUgxYTkgOSAwIDAgMCAwIDhsMy0yLjN6IiBmaWxsPSIjRkJCQzA1IiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48cGF0aCBkPSJNOSAzLjZjMS4zIDAgMi41LjQgMy40IDEuM0wxNSAyLjNBOSA5IDAgMCAwIDEgNWwzIDIuNGE1LjQgNS40IDAgMCAxIDUtMy43eiIgZmlsbD0iI0VBNDMzNSIgZmlsbC1ydWxlPSJub256ZXJvIi8+PHBhdGggZD0iTTAgMGgxOHYxOEgweiIvPjwvZz48L3N2Zz4=);
+    background-color:green;
+    background-repeat: no-repeat;
+    background-position:8px 11px;
+
+    &:hover {
+      background-color:yellow;
+      color: black;
+      box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.04), 0 2px 4px rgba(0, 0, 0, 0.25);
+    }
+
+    &:active {
+    
+      background-color: #eeeeee;
+
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.04), 0 2px 4px rgba(0, 0, 0, 0.25),
+        0 0 0 3px #c8dafc;
+    }
+  }
+  .userProfile {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    .profile {
+      border-radius: 50%;
+      height: 45px;
+    }
+    .log-out {
+      transition: background-color 0.3s, box-shadow 0.3s;
+      
+      padding: 5px 10px;
+      margin-left: 20px;
+      margin-right: 20px;
+      height: 40px;
+      border: none;
+      border-radius: 20px;
+      box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.04), 0 1px 1px rgba(0, 0, 0, 0.25);
+
+      background-color: orange;
+      color: white;
+      font-size: 14px;
+      font-weight: 600;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+        Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue",
+        sans-serif;
+
+      backdrop-filter: blur(3.5px);
+      -webkit-backdrop-filter: blur(3.5px);
+      background-repeat: no-repeat;
+      background-position: 12px 11px;
+
+      &:hover {
+        background-color: green;
+        color: white;
+        box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.04), 0 2px 4px rgba(0, 0, 0, 0.25);
+      }
+
+      &:active {
+        background-color: #eeeeee;
+      }
+
+      &:focus {
+        outline: none;
+        box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.04), 0 2px 4px rgba(0, 0, 0, 0.25),
+          0 0 0 3px #c8dafc;
+      }
+    }
+  }
 }
 
 @keyframes mobileMenu {
-    0% {
-        transform: translateY(-130%);
-    }
-    100% {
-        transform: translateY(0);
-    }
+  0% {
+    transform: translateY(-130%);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }

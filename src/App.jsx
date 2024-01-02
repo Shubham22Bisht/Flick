@@ -12,9 +12,11 @@ import  PageNotFound  from "./pages/404/PageNotFound";
 import  Explore  from "./pages/explore/Explore";
 import PersonDetails from "./pages/personDetails/PersonDetails.jsx";
 
-function App() {
-  const dispatch = useDispatch();
 
+
+function App() {
+
+  const dispatch = useDispatch();
   const { url } = useSelector((state) => state.home);
   useEffect(() => {
     fetchApiConfig();
@@ -49,6 +51,7 @@ function App() {
     dispatch(getGenres(allGenres));
   };
   return (
+
     <Router>
       <Header />
       <Routes>
