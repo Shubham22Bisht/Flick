@@ -171,7 +171,10 @@ export const Header = () => {
       ) : (
           <div className="userProfile">
           <img className="profile"  src={localStorage.getItem("profilePic") || noUser}/>
-          <button className="log-out" onClick={signUserOut}>SignOut</button>
+          <button className="log-out" onClick={()=>{
+            signUserOut();
+            
+          }}>SignOut</button>
           </div> 
       )}
     </header>
