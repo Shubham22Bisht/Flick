@@ -30,7 +30,6 @@ const ImageCarousel = ({ data, loading ,endpoint,title }) => {
         behavior:"smooth"
     })
   };
-
   const skItem = () => {
     return (
       <div className="skeletonItem">
@@ -58,15 +57,15 @@ const ImageCarousel = ({ data, loading ,endpoint,title }) => {
         />
       {!loading ? (
         <div className="carouselItems" ref={carouselContainer}>
-          {data?.map((item) => {
+          {data?.map((item,index) => {
             const posterUrl = item.file_path
               ? url.profile + item.file_path
               : PosterFallback;
             return (
-              <div key={item.id} 
+              <div key={index} 
               className="carouselItem"
-              onClick={()=>navigate(`/${item.media_type || endpoint }/${item.id}`)}>
-                <div className="posterBlock" onClick={navigate(`/person/${id}`)}>
+              >
+                 <div className="posterBlock" onClick={navigate(`/person/${id}`)} >
                   <a  href={posterUrl} target="_blank"><Img src={posterUrl}  /></a>
                   <CircleRating rating={item.vote_average.toFixed(1)} />
                 </div>

@@ -1,11 +1,11 @@
 import React from 'react'
 import "./style.scss";
-import PersonCard from './personCard/PersonCard';
+import PersonDetailsBanner from './personDetailsBanner/PersonDetailsBanner';
 import CastCrew from './personCarousels/CastCrew';
 const PersonDetails = () => {
   return (
     <div>
-      <PersonCard />
+      <PersonDetailsBanner />
       <CastCrew />
     </div>
   )

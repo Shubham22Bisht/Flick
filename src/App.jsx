@@ -11,7 +11,8 @@ import { SearchResult } from "./pages/searchResult/SearchResult";
 import  PageNotFound  from "./pages/404/PageNotFound";
 import  Explore  from "./pages/explore/Explore";
 import PersonDetails from "./pages/personDetails/PersonDetails.jsx";
-
+import { WatchList } from "./pages/watchlist/WatchList.jsx";
+import { Actors } from "./pages/actors/Actors.jsx";
 
 
 function App() {
@@ -60,6 +61,8 @@ function App() {
         <Route path="/person/:id" element={<PersonDetails/>}/>
         <Route path="/search/:query" element={<SearchResult />} />
         <Route path="/explore/:mediaType" element={<Explore />} />
+        <Route path="/actors" element={<Actors />} />
+        <Route path="/watchlist" element={<WatchList/>} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
       <Footer />

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import "./style.scss";
 import { useFetch } from "../../../hooks/useFetch";
 import dayjs from "dayjs";
 import { ContentWrapper } from "../../../components/contentWrapper/ContentWrapper";
@@ -21,8 +20,9 @@ import {
   doc,
 } from "firebase/firestore";
 import { MdDelete } from "react-icons/md";
+import "./style.scss";
 
-const PersonCard = () => {
+const PersonDetailsBanner = () => {
   const { id } = useParams();
   const { url } = useSelector((state) => state.home);
   const { data, loading } = useFetch(`/person/${id}`);
@@ -57,8 +57,7 @@ const PersonCard = () => {
             name: auth?.currentUser?.displayName,
             id: auth?.currentUser?.uid,
           },
-          actorId: id,
-          // data,
+          actorId: Number(id),
         }));
       setIsFavourite(true);
     } catch (err) {
@@ -80,7 +79,7 @@ const PersonCard = () => {
     getUserAddedToFavourite();
   }, [auth?.currentUser]);
   return (
-    <div className="personCard">
+    <div className="personDetailsBannner">
       {!loading && !imagesDataLoading ? (
         <>
           <React.Fragment>
@@ -106,7 +105,7 @@ const PersonCard = () => {
                 <div className="right">
                   <div className="row">
                     <div className="title">{data?.name}</div>
-                    <CircleRating rating={(data?.popularity / 10).toFixed(1)} />
+                    <CircleRating rating={(data?.popularity / 20).toFixed(1)} />
                     {!isFavourite ? (
                       <FaStar
                         className="addToFavourite"
@@ -215,4 +214,4 @@ const PersonCard = () => {
   );
 };
 
-export default PersonCard;
+export default PersonDetailsBanner;

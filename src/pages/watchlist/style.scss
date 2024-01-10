@@ -1,0 +1,12 @@
+@import "../../mixins.scss";
+.watchlist{
+    width: 100%;
+    background-color: var(--black);
+    padding-top: 100px;
+    margin-bottom: 50px;
+    @include md {
+      margin-bottom: 0;
+      padding-top: 120px;
+      min-height: 700px;
+    }
+}

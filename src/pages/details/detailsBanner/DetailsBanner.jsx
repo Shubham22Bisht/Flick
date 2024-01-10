@@ -35,7 +35,6 @@ const DetailsBanner = ({ video, crew }) => {
   const { mediaType, id } = useParams();
   const { data, loading } = useFetch(`/${mediaType}/${id}`);
   const { url } = useSelector((state) => state.home);
-
   const likesRef = collection(db, "likes");
   const movieCollectionRef = collection(db, "movie");
   const tvCollectionRef = collection(db, "tv");
@@ -45,11 +44,13 @@ const DetailsBanner = ({ video, crew }) => {
     where("mediaType", "==", mediaType),
     where("id", "==", id)
   );
-  const mediaDoc = auth?.currentUser && query(
-        mediaType=="movie"?movieCollectionRef:tvCollectionRef,
-        where("author.id", "==", auth?.currentUser?.uid),
-        where("mediaId", "==", id)
-  );
+  const mediaDoc =
+    auth?.currentUser &&
+    query(
+      mediaType == "movie" ? movieCollectionRef : tvCollectionRef,
+      where("author.id", "==", auth?.currentUser?.uid),
+      where("id", "==", id)
+    );
 
   const _genres = data?.genres?.map((g) => g.id);
 
@@ -63,7 +64,7 @@ const DetailsBanner = ({ video, crew }) => {
     try {
       const newDoc = await addDoc(likesRef, {
         userId: auth?.currentUser?.uid,
-        userName:auth?.currentUser?.displayName,
+        userName: auth?.currentUser?.displayName,
         mediaType,
         id,
       });
@@ -107,8 +108,8 @@ const DetailsBanner = ({ video, crew }) => {
   );
 
   const getUserAddedToWatchlist = async () => {
-      const item=await getDocs(mediaDoc);
-      if(item.docs.length>0)setHasUserAddedToWatchlist(true);
+    const item = await getDocs(mediaDoc);
+    if (item.docs.length > 0) setHasUserAddedToWatchlist(true);
   };
 
   useEffect(() => {
@@ -116,21 +117,27 @@ const DetailsBanner = ({ video, crew }) => {
     getLikes();
   }, [auth?.currentUser]);
 
-
-
   const addToWatchlist = async () => {
     try {
-      !hasUserAddedToWatchlist && await addDoc(
-        mediaType === "movie" ? movieCollectionRef : tvCollectionRef,
-        {
-          author: {
-            name: auth.currentUser.displayName,
-            id: auth.currentUser.uid,
-          },
-          mediaId: id,
-          // data,
-        }
-      );
+      !hasUserAddedToWatchlist &&
+        (await addDoc(
+          mediaType === "movie" ? movieCollectionRef : tvCollectionRef,
+          {
+            author: {
+              name: auth.currentUser.displayName,
+              id: auth.currentUser.uid,
+            },
+            id,
+            mediaData: {
+              poster_path: data.poster_path,
+              release_date: data?.release_date || data?.first_air_date,
+              media_type: mediaType,
+              id: data.id,
+              vote_average: data.vote_average,
+              title: data.title || data.name,
+            }
+          }
+        ));
       setHasUserAddedToWatchlist(true);
     } catch (err) {
       console.log(err);
@@ -141,7 +148,7 @@ const DetailsBanner = ({ video, crew }) => {
       const itemToDeleteQuery = query(
         mediaType === "movie" ? movieCollectionRef : tvCollectionRef,
         where("author.id", "==", auth?.currentUser?.uid),
-        where("mediaId", "==", id)
+        where("id", "==", id)
       );
       const itemToDeleteData = await getDocs(itemToDeleteQuery);
       const itemToDeleteId = itemToDeleteData.docs[0].id;
@@ -214,7 +221,6 @@ const DetailsBanner = ({ video, crew }) => {
                           }
                         />
                       )}
-
                       <div className="userFeedback">
                         {hasUserLiked ? (
                           <AiFillDislike
@@ -234,7 +240,7 @@ const DetailsBanner = ({ video, crew }) => {
                         {likes && (
                           <p className="userFeedbackInfo">
                             {" "}
-                            Likes: {likes?.length}{" "}
+                            Likes: {likes.length}{" "}
                           </p>
                         )}
                       </div>

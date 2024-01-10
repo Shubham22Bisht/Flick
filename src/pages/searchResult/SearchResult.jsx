@@ -7,6 +7,7 @@ import { fetchDataFromApi } from '../../utils/api';
 import { ContentWrapper } from '../../components/contentWrapper/ContentWrapper';
 import MovieCard from "../../components/movieCard/MovieCard.jsx";
 import Spinner from "../../components/spinner/Spinner.jsx";
+import { PersonCard } from '../../components/personCard/PersonCard.jsx';
 
 export const SearchResult = () => {
   
@@ -18,6 +19,7 @@ export const SearchResult = () => {
     setLoading(true);
     fetchDataFromApi(`/search/multi?query=${query}&page=${pageNum}`).then((res)=>{
       setData(res);
+      console.log(res);
       setPageNum((prev)=>prev+1);
       setLoading(false);
     });
@@ -50,7 +52,7 @@ export const SearchResult = () => {
               <>
               <div className="pageTitle">
                 {`Search ${
-                  data?.total_results>1 ? "results" : "result"} of "${query}"`}
+                  data?.total_results>1 ? "results" : "result"} for ${query}`}
               </div>
               <InfiniteScroll 
                className="content"
@@ -60,9 +62,8 @@ export const SearchResult = () => {
                loader={<Spinner/>}>
                 {
                   data?.results?.map((item,index)=>{
-                   return (
-                     <MovieCard key={index} data={item} />
-                   )
+                   if(item.media_type==="person")return <PersonCard key={index} data={item}/>
+                   return <MovieCard key={index} data={item}/>
                   })
                 }
               </InfiniteScroll>

@@ -27,7 +27,7 @@ export const Header = () => {
   }, [location]);
 
   const signInWithGoogle = () => {
-    signInWithPopup(auth, googleAuthProvider)
+    signInWithPopup(auth,googleAuthProvider)
       .then((res) => {
         const name = res?.user?.displayName;
         const email = res?.user?.email;
@@ -94,9 +94,10 @@ export const Header = () => {
     } else if (type == "tv") {
       navigate("/explore/tv");
     } else if (type == "actors") {
-      navigate("/person/popular");
+      navigate("/actors");
+    } else if(type=="watchlist"){
+      navigate("/watchlist");
     }
-
     setMobileMenu(false);
   };
   return (
@@ -130,6 +131,14 @@ export const Header = () => {
             }}
           >
             Actors
+          </li>
+          <li
+            className="menuItem"
+            onClick={() => {
+              navigationHandler("watchlist");
+            }}
+          >
+            WatchList
           </li>
           <li className="menuItem">
             <HiOutlineSearch
@@ -173,7 +182,6 @@ export const Header = () => {
           <img className="profile"  src={localStorage.getItem("profilePic") || noUser}/>
           <button className="log-out" onClick={()=>{
             signUserOut();
-            
           }}>SignOut</button>
           </div> 
       )}

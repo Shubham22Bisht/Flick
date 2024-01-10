@@ -1,0 +1,10 @@
+.knownFor{
+    display: flex;
+    gap: 5px;
+    .mediaItem{
+        background-color: var(--pink);
+        padding: 3px 5px;
+        border-radius: 4px;
+        color: white;
+    }
+}

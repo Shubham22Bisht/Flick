@@ -6,7 +6,6 @@ import { useParams } from 'react-router-dom';
 const CastCrew = () => {
   const {id}=useParams();
   const {data,loading}=useFetch(`/person/${id}/combined_credits`);
-  console.log(data);
   return (
     <div className="CastCrew">
      {data?.cast?.length>0 && (
