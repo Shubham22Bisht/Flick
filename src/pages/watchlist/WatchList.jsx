@@ -5,6 +5,8 @@ import "./style.scss";
 import { useSelector } from "react-redux";
 import { ContentWrapper } from "../../components/contentWrapper/ContentWrapper";
 import Carousel from "../../components/carousel/Carousel";
+import { Img } from "../../components/lazyLoadImage/Img";
+import Nothing from "../../assets/no-results.png"
 export const WatchList = () => {
   const [moviesToWatch, setMoviesToWatch] = useState([]);
   const [tvShowsToWatch, setTvShowsToWatch] = useState([]);
@@ -13,11 +15,11 @@ export const WatchList = () => {
   const [moviesloading, setMoviesLoading] = useState(true);
   const [tvShowsLoading, setTvShowsLoading] = useState(true);
   const { url } = useSelector((state) => state.home);
-  const movieQuery = query(
+  const movieQuery = auth?.currentUser && query(
     movieCollectionRef,
     where("author.id", "==", auth?.currentUser?.uid)
   );
-  const tvShowQuery = query(
+  const tvShowQuery = auth?.currentUser && query(
     tvCollectionRef,
     where("author.id", "==", auth?.currentUser?.uid)
   );
@@ -47,14 +49,15 @@ export const WatchList = () => {
       console.log(error);
     }
   };
-  useEffect(() => {
-    getMovies();
-    getTvShows();
-  }, []);
-
+    if(auth?.currentUser){
+      getMovies();
+      getTvShows();
+    }
   return (
-    <div className="watchlist">
+     auth.currentUser ? (
+      <div className="watchlist">
       <ContentWrapper>
+            
             <Carousel
               data={moviesToWatch}
               loading={moviesloading}
@@ -69,5 +72,14 @@ export const WatchList = () => {
             />
          </ContentWrapper>
     </div>
+    ) :(
+       <div className="emptyWatchlist">
+         <Img  className="image" src={Nothing}/>
+         <div className="content">
+          Please Sign In !!
+         </div>
+         
+       </div>
+    )
   );
 };

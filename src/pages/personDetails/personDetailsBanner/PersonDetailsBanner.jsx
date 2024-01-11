@@ -39,7 +39,7 @@ const PersonDetailsBanner = () => {
     query(
       actorRef,
       where("author.id", "==", auth?.currentUser?.uid),
-      where("actorId", "==", id)
+      where("id", "==", id)
     );
 
   const getUserAddedToFavourite = async () => {
@@ -57,7 +57,7 @@ const PersonDetailsBanner = () => {
             name: auth?.currentUser?.displayName,
             id: auth?.currentUser?.uid,
           },
-          actorId: Number(id),
+          id
         }));
       setIsFavourite(true);
     } catch (err) {

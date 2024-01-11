@@ -1,4 +1,10 @@
 @import "../../mixins.scss";
+.empty{
+    margin-bottom: 300px;
+    font-size: 50px;
+    font-weight: 800;
+    color: orange;
+}
 .carousel {
     margin-bottom: 50px;
     .contentWrapper {

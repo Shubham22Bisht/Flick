@@ -78,8 +78,10 @@
         }
     }
     &:hover {
-        .posterBlock {
-            opacity: 0.5;
+        .posterBlock{
+            opacity: 0.8;
+            width: 120%;
+            margin-bottom: 10px;
         }
     }
 }

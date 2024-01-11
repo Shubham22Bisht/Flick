@@ -10,3 +10,27 @@
       min-height: 700px;
     }
 }
+.emptyWatchlist{
+  padding-top: 40px;
+  width: 100%;
+  margin-bottom: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @include md {
+    margin-bottom: 0;
+    padding-top: 120px;
+    min-height: 700px;
+  }
+   .content{
+    font-size: 100px;
+     font-weight: 800;
+     color: greenyellow;
+    
+   }
+   .image{
+     width: 80%;
+     height: 100%;
+   }
+   
+}
