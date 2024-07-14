@@ -1,5 +1,5 @@
-Going to the live link in the deployments section will try to load the page and the data won't load due to the latest step taken by india governmen to ban the tmbd api i used to 
-craate the website, The only solution i have found till now is try using a vpn and all set the site would run as usual with no error or buffer loading
+Going to the live link in the deployments section will try to load the page and the data won't load due to the latest step taken by india governmen to ban the tmbd api which is  used to 
+craate the website.The only solution i have found till now is try using a vpn and all set the site would run as usual with no error or buffer loading
 
 # React + Vite
 
